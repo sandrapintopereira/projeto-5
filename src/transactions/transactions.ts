@@ -20,7 +20,7 @@ export function adicionarTransacao(transacao: Transacao): Transacao {
    
 }
 
-export function removerTransacao (id: number) {
+export function removerTransacao (id: number): Transacao[]{
    const idNum = Number(id);
    transacoes = transacoes.filter(t => t.id !== idNum);
 
