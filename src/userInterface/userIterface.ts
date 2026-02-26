@@ -2,7 +2,7 @@ import { calcularSaldo, calcularReceita,calcularDespesa } from "../state/state.j
 import { retornarListaTransacoes, removerTransacao } from "../transactions/transactions.js";
 import { Transacao } from "../interfaces/transaction.js";
 
-export const containerLista = document.querySelector(".lista-transacoes");
+export const containerLista = document.querySelector(".lista-transacoes") as HTMLElement;
 export const saldoTotal: HTMLElement | null = document.querySelector(".card-saldo");
 export const receitaTotal: HTMLElement | null = document.querySelector(".card-receitas");
 export const despesaTotal: HTMLElement | null = document.querySelector(".card-despesas");
