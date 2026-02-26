@@ -1,4 +1,6 @@
-export function calcularSaldo(lista) {
+import { Transacao } from "../interfaces/transaction.js";
+
+export function calcularSaldo(lista: Transacao[]): number {
    return lista.reduce((total, transacao) => {
       if(transacao.tipo === "receita") {
          return total + transacao.valor;
@@ -9,8 +11,8 @@ export function calcularSaldo(lista) {
 }
 
 
-export function calcularReceita(lista) {
-   return lista.reduce((total, transacao) => {
+export function calcularReceita(lista: Transacao[]): number {
+   return lista.reduce((total, transacao: Transacao) => {
       if(transacao.tipo === "receita") {
          return total + transacao.valor;
       }
@@ -19,8 +21,8 @@ export function calcularReceita(lista) {
 }
 
 
-export function calcularDespesa(lista) {
-   return lista.reduce((total, transacao) => {
+export function calcularDespesa(lista: Transacao[]): number {
+   return lista.reduce((total, transacao: Transacao) => {
       if(transacao.tipo === "despesa") {
          return total + transacao.valor;
       }

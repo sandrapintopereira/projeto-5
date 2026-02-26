@@ -3,13 +3,13 @@ import {containerLista, renderizarListaTransacoes} from './userInterface/userIte
 
 renderizarListaTransacoes(retornarListaTransacoes());
 
-const botaoAdicionar = document.querySelector(".adiciona-historia");
+const botaoAdicionar = document.querySelector(".adiciona-historia") as HTMLButtonElement;
 
 
 botaoAdicionar.addEventListener("click", () => {
-    const descricao = document.querySelector("#descricao").value.trim();
-    const valor = document.querySelector("#quantidade").value;
-    const tipo = document.querySelector("#tipo-transacao").value;
+    const descricao: string = (document.querySelector("#descricao") as HTMLInputElement).value.trim();
+    const valor: number = parseFloat((document.querySelector("#quantidade") as HTMLInputElement).value);
+    const tipo: "receita" | "despesa"= (document.querySelector("#tipo-transacao") as HTMLInputElement).value as "receita" | "despesa";
     
     if(!descricao || valor <= 0) {
         alert("Preenche corretamente os campos.");
@@ -17,24 +17,26 @@ botaoAdicionar.addEventListener("click", () => {
     }
 
     adicionarTransacao({
+        id: Date.now(),
         descricao,
         valor,
-        tipo
+        tipo, 
+        data: new Date().toLocaleDateString(),
     });
 
 
     renderizarListaTransacoes(retornarListaTransacoes());
         //para limpar formulário depois de adicionar 
-        document.querySelector("#descricao").value = "";
-        document.querySelector("#quantidade").value = "";
-        document.querySelector("#tipo-transacao").value = "receita";
+        (document.querySelector("#descricao") as HTMLInputElement).value = "";
+        (document.querySelector("#quantidade") as HTMLInputElement).value = "";
+        (document.querySelector("#tipo-transacao") as HTMLInputElement).value = "receita";
     
 });
 
 containerLista.addEventListener("click", (e) => {
-    if(e.target.classList.contains("botao-remover")) {
-        const id = e.target.dataset.id;
-        removerTransacao(id);
+    if((e.target as HTMLElement).classList.contains("botao-remover")) {
+        const id = (e.target as HTMLElement).dataset.id;
+        removerTransacao(Number(id!));
         renderizarListaTransacoes(retornarListaTransacoes());
     }
 })
