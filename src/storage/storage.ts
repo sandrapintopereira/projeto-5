@@ -1,3 +1,4 @@
+import { Transacao } from "../interfaces/transaction.js";
 /*
 OBJETIVO:
 Salvar e recuperar as transações no localStorage.
@@ -9,7 +10,7 @@ const CHAVE_FIXA = "transacoes";
 /*2) Quando salvar:
    - Converter array de objetos para JSON.
    - Usar localStorage.setItem().*/
-export function salvarStorage(transacoes) {
+export function salvarStorage(transacoes: Transacao[]): void {
    return localStorage.setItem(CHAVE_FIXA, JSON.stringify(transacoes));
    
 }
@@ -17,11 +18,11 @@ export function salvarStorage(transacoes) {
    - Buscar com localStorage.getItem().
    - Se existir, converter de volta com JSON.parse().
    - Se não existir, retornar array vazio.*/
-export function carregarStorage() {
+export function carregarStorage(): Transacao[] {
    const dadosCarregados = localStorage.getItem(CHAVE_FIXA);
 
    if(dadosCarregados) {
-      return JSON.parse(dadosCarregados);
+      return JSON.parse(dadosCarregados) as Transacao[];
    } else {
       return [];
    }

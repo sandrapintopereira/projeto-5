@@ -1,7 +1,7 @@
 import { salvarStorage, carregarStorage } from "../storage/storage.js";
 import { Transacao } from "../interfaces/transaction.js";
 
-let transacoes = carregarStorage();
+let transacoes: Transacao[] = carregarStorage();
 
 
 export function adicionarTransacao(transacao: Transacao): Transacao {
@@ -29,8 +29,8 @@ export function removerTransacao (id: number) {
 
 }
 
-export function retornarListaTransacoes() {
-   return transacoes;
+export function retornarListaTransacoes(): Transacao[] {
+   return [...transacoes];
 }
 /*
 OBJETIVO:
