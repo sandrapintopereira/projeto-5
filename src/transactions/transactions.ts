@@ -1,14 +1,15 @@
 import { salvarStorage, carregarStorage } from "../storage/storage.js";
+import { Transacao } from "../interfaces/transaction.js";
 
 let transacoes = carregarStorage();
 
-export function adicionarTransacao(dados) {
-   const novaTransacao = {
+
+export function adicionarTransacao(transacao: Transacao): Transacao {
+   const novaTransacao: Transacao = {
       id: Date.now(),
-      descricao: dados.descricao,
-      valor: Number(dados.valor),
-      tipo: dados.tipo,
-      categoria: dados.categoria,
+      descricao: transacao.descricao,
+      valor: Number(transacao.valor),
+      tipo: transacao.tipo,
       data: new Date().toLocaleDateString()
    };
 
@@ -19,7 +20,7 @@ export function adicionarTransacao(dados) {
    
 }
 
-export function removerTransacao (id) {
+export function removerTransacao (id: number) {
    const idNum = Number(id);
    transacoes = transacoes.filter(t => t.id !== idNum);
 
