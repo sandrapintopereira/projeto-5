@@ -3,20 +3,20 @@ import { retornarListaTransacoes, removerTransacao } from "../transactions/trans
 import { Transacao } from "../interfaces/transaction.js";
 
 export const containerLista = document.querySelector(".lista-transacoes");
-export const saldoTotal = document.querySelector(".card-saldo");
-export const receitaTotal = document.querySelector(".card-receitas");
-export const despesaTotal = document.querySelector(".card-despesas");
+export const saldoTotal: HTMLElement | null = document.querySelector(".card-saldo");
+export const receitaTotal: HTMLElement | null = document.querySelector(".card-receitas");
+export const despesaTotal: HTMLElement | null = document.querySelector(".card-despesas");
 
 
-export function limparLista() {
+export function limparLista(): void {
    if(!containerLista) {
       return;
    }
 
-   return containerLista.innerHTML = "";
+   containerLista.innerHTML = "";
 }
 
-export function criarTransacaoElemento(transacao: Transacao) {
+export function criarTransacaoElemento(transacao: Transacao): HTMLElement {
    const elementoTransacao = document.createElement("div");
    elementoTransacao.className = "item-transacao";
    let valorFormatado;
@@ -38,21 +38,24 @@ export function criarTransacaoElemento(transacao: Transacao) {
    return elementoTransacao;
 };
 
-export function renderizarListaTransacoes(lista: Transacao[]) {
+export function renderizarListaTransacoes(lista: Transacao[]): void {
    limparLista();
-   lista.forEach(transacao => {
+
+   lista.forEach((transacao: Transacao) => {
+      if(containerLista) {
       containerLista.appendChild(criarTransacaoElemento(transacao));
+      }
    });
 
    atualizarCards();
 };
 
-export function atualizarCards() {
+export function atualizarCards(): void {
    const lista = retornarListaTransacoes();
 
-   saldoTotal.textContent = Number(calcularSaldo(lista)).toFixed(2) + "€";
-   receitaTotal.textContent = Number(calcularReceita(lista)).toFixed(2) + "€";
-   despesaTotal.textContent = Number(calcularDespesa(lista)).toFixed(2) + "€";
+   saldoTotal!.textContent = Number(calcularSaldo(lista)).toFixed(2) + "€";
+   receitaTotal!.textContent = Number(calcularReceita(lista)).toFixed(2) + "€";
+   despesaTotal!.textContent = Number(calcularDespesa(lista)).toFixed(2) + "€";
 
 };
 
